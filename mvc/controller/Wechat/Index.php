@@ -8,7 +8,7 @@ class App_Controller_Wechat_Index{
    }
    public function indexAction(){
 
-   print_r($_SERVER);
+   print_r($_POST);
    echo "test";
 
 
