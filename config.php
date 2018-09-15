@@ -1,7 +1,7 @@
 <?php
     $config = array(
     //所需要的自定义扩展组件  此配会加载extend 中的相应文件
-    'local_name'=>'https://xingke.store',
+    'local_name'=>'http://yaoyao.mobi',
     'extends' =>  array(
             //文件夹            文件
             'controller' => 'controller',    //控制器基本组件
@@ -11,6 +11,8 @@
             'tools'      => 'tools',         //常见公共函数
             'file'       => 'file',          //文件相关操作
             'page'       => 'page',          //常用功能代码整合
+            'client'       => 'client',          //常用功能代码整合
+            'wechat'       => 'wechat',          //常用功能代码整合
             ),
      //日志
     'log' =>  array(

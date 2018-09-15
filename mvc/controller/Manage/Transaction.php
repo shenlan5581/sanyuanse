@@ -8,7 +8,6 @@ class App_Controller_Manage_Transaction extends Base_Manage{
       //  幻灯列表
       public function __construct() {
       parent::__construct();
-      $this->ctr=new Controller;
       $this->ctr->DisplaySmart('/Manage/Transaction/menu.html');
       }
 
