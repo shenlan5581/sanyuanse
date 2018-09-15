@@ -4,7 +4,7 @@
 class App_Controller_Wechat_Index{
    public $ctr;
    public function __construct(){
-     $this->$ctr=new Controller;
+     $this->ctr=new Controller;
    }
    public function indexAction(){
 
