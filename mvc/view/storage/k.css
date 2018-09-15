@@ -1,0 +1,36 @@
+/*
+*  自由样式表存储库
+*/
+.a1{
+    display: inline-block;
+    width:100px;
+    text-decoration:none;  
+    color:rgb(84, 84, 84);
+  }
+  .a1:hover{
+    text-decoration:none;  
+    color:rgb(180, 33, 84);
+    font-weight: 900;  
+  }
+  
+  .a2{
+    display: inline-block;
+    text-decoration:none;  
+    color:rgb(118, 118, 118);
+  }
+  .a2:hover{
+    text-decoration:none;  
+    color:rgb(19, 19, 19);
+  }
+  .likebutton{
+  cursor: pointer;
+  }
+
+
+
+  .border02{
+    border-style:solid;
+    border-width: 1px;
+    border-color: rgb(188, 188, 188);
+    border-radius:5px; 
+}

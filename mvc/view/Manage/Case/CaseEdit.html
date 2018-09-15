@@ -1,0 +1,341 @@
+
+<strong>
+    {if isset($oper)}
+    {$oper} 
+    {/if}
+</strong>
+
+<form method="Post" action='/Manage/Case/CaseEdit'>
+<div class="container-fluid" >
+    <div class ="row clearfix">
+                    <div class ="col-sm-3">
+                        <!--占位-->
+                    </div> 
+            <div class ="col-sm-6">
+                <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span style = 'width:80px'class="input-group-text">标题</span>
+                </div>
+                   <input required="required"  name='title' type="text" value="{if isset($row['c_title'])} {$row['c_title']} {/if}" class="form-control " aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+            </div>
+        </div>  
+
+        <div class ="row clearfix">
+                    <div class ="col-sm-3">
+                        <!--占位-->
+                    </div> 
+                    <div class ="col-sm-6">
+                        <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span style = 'width:80px'class="input-group-text">简介</span>
+                        </div>
+                           <textarea required="required"  name='biref' type="text" value="{if isset($row['c_biref'])} {$row['c_biref']} {/if}" class="form-control " aria-label="Username" aria-describedby="basic-addon1">
+                            {if isset($row['c_biref'])} {$row['c_biref']} {/if}
+                            </textarea>
+                        </div>
+                    </div>
+                </div>  
+
+    <div class ="row clearfix">
+                    <div class ="col-sm-3">
+                        <!--占位-->
+                    </div> 
+    
+            <div class ="col-sm-6">
+                      <img id ='lit_img' class='border02' style ="text-align:center;font-size:15px;background-color:rgb(239, 237, 237); height:100px;width:auto;margin:5px;display:block"src="{$row['c_title_img']}" alt='微缩图'></img>  
+                <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span style = 'width:80px'class="input-group-text">微缩图</span>
+                </div>
+                   <input  required="required"  name='title_img' type="text" id ='title_img' value="{if isset($row['c_title_img'])} {$row['c_title_img']} {/if}" class="form-control " aria-label="Username" aria-describedby="basic-addon1">
+                   {if isset($row['c_title_img'])}
+                      <button type="button"class ="btn btn-sm btn-info" onclick=k_crop()>替换</button>
+                   {else}
+                      <button type="button"class ="btn btn-sm btn-info" onclick=k_crop()>上传</button>
+                   {/if}
+                </div>
+            </div>
+    </div> <br>
+    
+    <div class ="row clearfix">
+                    <div class ="col-sm-3">
+                        <!--占位-->
+                    </div> 
+                <div class="col-sm-6 column">
+                        <!-- 类型 -->
+                                <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend ">
+                                          <label   style = 'width:80px'class="input-group-text">类型</label>
+                                        </div>
+                                       <select name='type'   id = 'type' class="custom-select custom-select-sm" >
+                                            {foreach $type as $k => $v}
+                                                  {if $row['c_type'] == $k}
+                                                    <option selected ={$row['c_type']} value ={$row['c_type']}>{$v}</option>
+                                              {else}
+                                                   <option  value ={$k}>{$v}</option>
+                                              {/if}
+                                            {/foreach}
+                                      </select>
+                                      </div>
+               </div>
+    </div> 
+
+    <div class ="row clearfix">
+                    <div class ="col-sm-3">
+                        <!--占位-->
+                    </div> 
+            <div class="col-sm-6 column">
+                    <!-- 类型 -->
+                            <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend ">
+                                      <label style = 'width:80px' class="input-group-text">风格</label>
+                                    </div>
+                                   <select name='style'  id = 'type' class="custom-select custom-select-sm" >
+                                        {foreach $style as $k => $v}
+                                              {if $row['c_style'] == $k}
+                                                <option selected ={$row['c_style']} value ={$row['c_style']}>{$v}</option>
+                                          {else}
+                                               <option  value ={$k}>{$v}</option>
+                                          {/if}
+                                        {/foreach}
+                                  </select>
+                                  </div>
+           </div>
+</div> 
+
+ <div class ="row clearfix">
+                    <div class ="col-sm-3">
+                        <!--占位-->
+                    </div> 
+        <div class ="col-sm-6">
+                <textarea required="required"   name='html' id="editor_id" name="content" style="width:100%; height:500px;">
+                    {if isset($id)}{$row['c_article']}{/if}
+                </textarea>
+                <br>
+                <input type ="hidden" name='id' value="{if isset($row['c_id']) || isset($id)}{$row['c_id']}{/if}"></input>
+                <input type ="hidden" name='oper' value="commit"></input>
+                <button   type="submit" class= 'btn btn-dark'>save</button>       
+        </div> 
+</div>  
+
+</form>
+
+
+  <!-- 文本编辑器组件 -->
+  
+      <script charset="utf-8" src="/public/kindeditor/kindeditor-all.js"></script>
+      <script charset="utf-8" src="/public/kindeditor/lang/zh-CN.js"></script>
+  
+      <script>
+          KindEditor.ready(function(K) {
+          var    options={
+              items:[
+                  'source', '|', 'undo', 'redo', '|', 'preview',   'cut', 'copy', 'paste',
+                  '|', 'justifyleft', 'justifycenter', 'justifyright',
+                  'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                  'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen',
+                  'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                  'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|','image',
+                  'table', 'hr', 'pagebreak',
+                      'link', 'unlink', '|', 'about'
+                      ],
+              uploadJson:'/Public/Upload/kindeditUpload',
+              afterBlur:function(){   //关键点  获取不到内容
+                          this.sync();
+                         }
+                      }
+                      window.editor = K.create('#editor_id',options);
+              });
+
+
+
+$('#title_img').change(function(){
+    var url =$('#title_img').val();
+    $('#lit_img').attr('src',url);
+   });
+
+   </script>
+  
+
+
+
+
+
+
+  <!-- 图片裁剪 
+doc: 使用Jcrop 作为前端处理
+流程->外部调用 显示模态框 ->上传图片->对图片裁切->保存->调用回调
+
+-->
+<div id ="crop" style="margin:10px;" >
+        <script src="/public/Jcrop/js/jquery.min.js"></script>
+        <script src="/public/Jcrop/js/jquery.Jcrop.js"></script>
+        <script src="/public/Jcrop/js/jquery.color.js"></script>
+        <script type="text/javascript">
+        // 全局存储变量
+           var api =null;
+           var img_info=null;  //图片路径信息
+           var point =null;     //裁切坐标
+           var param;
+        
+        // 外部调用函数
+        function k_crop(para){
+            $('#exampleModal').modal({
+                backdrop:'static',
+                keyboard:false
+            });
+            $('#exampleModal').modal('show');
+            param=para;
+        }
+        /* 回调函数 裁剪成功调用*/
+        function crop_callback(){
+         $('#title_img').val(img_info['url']);
+         $('#lit_img').attr('src',img_info['url']);
+        }
+        function crop($){
+            jQuery(function($){
+            $('#target').Jcrop({
+              onSelect:showCoords,
+        //      onChange:showpoint,
+              bgOpacity: 0.5,   //透明度
+              bgColor: 'white', //背景色
+              addClass: 'jcrop-light',
+              aspectRatio:16/9,  //宽高比
+              boxWidth:500,
+              boxHeight:500,
+            //   setSelect:[20,50,50,70],   //初始化选择区域   
+          },function(){ api=this;   });
+        });
+        }
+        function showCoords(c){  //c
+            point=c;
+        }
+        function cancel(c){
+         var data={
+             'path':img_info['path']
+            } ;
+        
+            if(img_info==null){
+                return;
+            } else {
+                $.ajax({
+                type: 'Get',
+                url:'/Public/Upload/DeleteFile',
+                data:data,
+                success: function (result) {
+                    var json = JSON.parse(result);
+                    if (json.status == true) { //success 
+                        api.destroy();  
+                        $("#pic").empty();  //清空div
+                    } else {  //failed
+                        alert(json.msg);
+                    }
+                }
+              })// ajax end
+            }
+          }
+        
+        //第二此裁剪
+        function saveimg(){   //cb
+            if(point == null){
+                return
+            }
+            point= JSON.stringify(point);
+            data={
+             'point':point,
+             'path':img_info['path'],
+            }
+            $.ajax({
+            type: 'Get',
+            url: '/Public/Upload/CropImg',
+            data:data,
+            success: function (result) {
+                var json = JSON.parse(result);
+                if (json.status == true) { //success 
+                    $('#exampleModal').modal('hide');
+                    api.destroy();  
+                    $("#pic").empty();  //清空div
+                    crop_callback();
+                } else {  //failed
+                    alert(json.msg);
+                }
+            }
+        })// ajax end
+        }
+        // 第一次上传文件
+        function uploadimg(){
+          var formData =  new FormData($('#upload')[0]);
+         // var fileList = $("#img").files;      //获取文件
+         // formData.append('jpg', fileList[0]); //添加文件 
+          $.ajax({
+            type: 'Post',
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须 
+            url: '/Public/Upload/UploadImg',
+            data:formData,
+            success: function (result) {
+                $("#target").css('');
+                var json = JSON.parse(result);
+                if (json.status == true) { //success 
+                    img_info=json.data;
+                    if(api !=null){
+                    $("#pic").empty();  //清空div
+                    var html="<img  id='target' src="+json.data['url']+"></img>";  //添加目标
+                    $("#pic").append(html);
+                    api.destroy();  
+                    crop();  //裁剪
+                    }else{
+                    var html="<img id ='target' src="+json.data['url']+"></img>";
+                    $("#pic").append(html);
+                    crop();
+                    }
+                } else {  //failed
+                   alert(json.msg);
+                }
+            }
+        })// ajax end
+        }
+           </script>
+           <link rel="stylesheet" href="/public/Jcrop/css/jquery.Jcrop.css" type="text/css" />
+        
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content"  style="width:600px;" > <!--改大小-->
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">图片裁切</h5><br>
+                      <span style="font-size: 10px;">仅支持 jpg 图片格式 且最大2M </span>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+        
+                            <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="inputGroupFileAddon01"></span>
+                                    </div>
+                                    <div class="custom-file">
+                                    <form id="upload">
+                                      <input type="file" name='img' class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                    </form>
+                                      <label class="custom-file-label" for="inputGroupFile01">选择文件</label>
+                                    </div>
+                                  </div>
+        
+                            <button type='button' class ="btn btn-info" onclick =uploadimg() >上传</button>
+                       <div id="pic"> 
+                       </div>
+        
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-sm btn-secondary" onclick=cancel()  data-dismiss="modal">取消</button>
+                      <button type="button" onclick=saveimg() class ="btn btn-sm btn-primary">保存</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+         
+        
+        

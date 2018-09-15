@@ -1,0 +1,78 @@
+  框架说明
+前置：
+  ngingx 重写 url 
+       1 .js/.css 文件到view文件夹(html文件引入的根目录为该文件夹）
+       2 .jpg 文件到sources文件夹
+       3 其他请求将转换为(q=参数) 域名：模块/控制器/函数
+        
+流程 
+   1 index 加载相应文件->定义宏->创建app实例
+   2 app实例::run()->加载扩展组件->实例log->分发请求
+   ojk
+                      |  
+                      |-> 自定义组件 
+                             1 controller（处理页面输出，参数获取，调度）
+                             1 db        (数据库封装）
+
+运行级别 
+   DEBUG       直接输出
+   RELEASE     写入文件
+
+控制器 模型 数据接口
+Controller 提供GetPare函数 用以获取前台参数
+定义数组 array('name','type') 1 字段名数组  并转类类型
+
+动态更改数据库：tools 中提供工改数据库操作（默认设置在配置中）
+
+
+文件加载问题 
+     默认行为是在解析url请求之后加载相应文件
+     所以控制只加载了相应的一个文件（也就是说不能在一个控制器中创建调用其他的控制器）
+
+超级管理员 
+  超级管理员创建 /Manage/Sign/Super
+  超级管理员只能有一个.如果存在则跳转登陆，如果不存在则创建（依据数据库中存在某个用户级别）
+
+页面布局  
+   控制器模块中的 Base 前缀文件      作为某个模块的基类 处理验证页面布局等功能 他应该在构造函数中加载view 中的某个layou文件
+   view模块中的 layout-xxx 文件夹   作为某个模块的页面布局 head部分 foot部分  及引入css js 文件等
+ 
+##php 重名 会造成什么错误都不输出
+
+
+## html组件由 php 控制输出？？
+
+
+
+
+
+
+(1)：URL路由
+kk.cn/test/test/test
+域名：模块/控制器/函数
+1
+根据模块名和控制名加载相应文件
+example:
+mvc/crt/test/test.php  （文件）
+2
+根据控制名实例化对象
+prefix_模块名_控制器名 
+(前缀在inc文件中可设定)
+example:
+class  App_Ctr_Test_Test
+2
+根据函数名调用
+   testAction
+example:
+   public function testAction(){
+     ... ... 
+  } 
+默认模块，控制器，方法 均为 index 
+(inc 文件中设定)
+(2)URL 参数
+set: kk.cn/test/test/test?parameter=123456;
+get: $_REQUEST['parameter'];
+rewrite:
+css js 文件重定位到 /mvc/view 文件下  引用时以此为根目录
+资源文件重定位到 /sources文件下        引用时以此为根目录
+公共图片上传接口 /Public/Upload/UploadImg  字段：'img' 返回资源路径

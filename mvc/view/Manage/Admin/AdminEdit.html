@@ -1,0 +1,69 @@
+
+   {if isset($message)}
+   <div class="alert alert-success" role="alert">
+   {$message}
+     </div>
+   {/if}
+<div id='login ' >
+        <div class="container">
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-4 column">
+                    <h4 style="display: block" class ="m-auto"> {if isset($oper)}{$oper}{else}创建{/if} </h4>
+                        <form method="POST" action="/Manage/Admin/AdminEdit"      class="form-horizontal" role="form">
+                            <div class="form-group">
+                    <hr>
+                                <div class="col-sm-12">
+                                    用户名
+                   <input class="form-control"  name ='name'  value="{if isset($admin)}{$admin}{else}{/if}" type="text" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    密码  <input name ='pass1' class="form-control" id="inputPassword3" type="password" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    密码确认  <input name='pass2' class="form-control" id="inputPassword3" type="password" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    邮箱<input name='email' class="form-control" id="inputPassword3" type="email" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    权限等级
+                                        <select onchange=search() name='level'  id = 'level' class="custom-select" id="inputGroupSelect01">
+                                                {for $i=1 to 3}
+                                                  {if $i == $level}
+                                                  <option selected>{$i}</option>
+                                                  {else}
+                                                  <option value={$i}>{$i}</option>
+                                                  {/if}
+                                                {/for}
+                                                </select>
+                                </div>
+                                <input type ="hidden" name='edit_id' value="{if isset($id)}{$id}{/if}"></input>
+                                <input type ="hidden" name='id' value="{if isset($id)}{$id}{/if}"></input>
+                                <input type ="hidden" name='oper' value="commit"></input>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                    <hr>
+                                     <button type="submit" class="btn btn-info">提交</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="col-md-4 column">
+                    </div>
+                </div>
+            </div>
+
+</div>
+

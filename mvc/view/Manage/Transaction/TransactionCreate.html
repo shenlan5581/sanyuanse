@@ -1,0 +1,119 @@
+
+<form method="Post" action='/Manage/Case/CaseEdit'>
+    <div class="container-fluid" >
+      <div class ="row clearfix">  
+        <div class ="col-sm-6">
+
+          <div class ="row clearfix">
+                <div class ="col-sm-6">
+
+                       <input type= "checkbox"></div>
+ 
+
+                </div>
+            </div>  
+    
+            <div class ="row clearfix">
+
+                        <div class ="col-sm-6">
+                            <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span style = 'width:80px'class="input-group-text">简介</span>
+                            </div>
+                               <textarea required="required"  name='biref' type="text" value="{if isset($row['c_biref'])} {$row['c_biref']} {/if}" class="form-control " aria-label="Username" aria-describedby="basic-addon1">
+                                {if isset($row['c_biref'])} {$row['c_biref']} {/if}
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>  
+
+                </div>
+            </div>    <!--left-->
+
+
+
+
+        <div class ="row clearfix">
+                        <div class ="col-sm-3">
+                            <!--占位-->
+                        </div> 
+        
+                <div class ="col-sm-6">
+                          <img id ='lit_img' class='border02' style ="text-align:center;font-size:15px;background-color:rgb(239, 237, 237); height:100px;width:auto;margin:5px;display:block"src="{$row['c_title_img']}" alt='微缩图'></img>  
+                    <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                        <span style = 'width:80px'class="input-group-text">微缩图</span>
+                    </div>
+                       <input  required="required"  name='title_img' type="text" id ='title_img' value="{if isset($row['c_title_img'])} {$row['c_title_img']} {/if}" class="form-control " aria-label="Username" aria-describedby="basic-addon1">
+                       {if isset($row['c_title_img'])}
+                          <button type="button"class ="btn btn-sm btn-info" onclick=k_crop()>替换</button>
+                       {else}
+                          <button type="button"class ="btn btn-sm btn-info" onclick=k_crop()>上传</button>
+                       {/if}
+                    </div>
+                </div>
+        </div> <br>
+
+
+        <div class ="row clearfix">
+                        <div class ="col-sm-3">
+                            <!--占位-->
+                        </div> 
+                    <div class="col-sm-6 column">
+                            <!-- 类型 -->
+                                    <div class="input-group input-group-sm mb-3">
+                                            <div class="input-group-prepend ">
+                                              <label   style = 'width:80px'class="input-group-text">类型</label>
+                                            </div>
+                                           <select name='type'   id = 'type' class="custom-select custom-select-sm" >
+                                                {foreach $type as $k => $v}
+                                                      {if $row['c_type'] == $k}
+                                                        <option selected ={$row['c_type']} value ={$row['c_type']}>{$v}</option>
+                                                  {else}
+                                                       <option  value ={$k}>{$v}</option>
+                                                  {/if}
+                                                {/foreach}
+                                          </select>
+                                          </div>
+                   </div>
+        </div> 
+    
+        <div class ="row clearfix">
+                        <div class ="col-sm-3">
+                            <!--占位-->
+                        </div> 
+                <div class="col-sm-6 column">
+                        <!-- 类型 -->
+                                <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend ">
+                                          <label style = 'width:80px' class="input-group-text">风格</label>
+                                        </div>
+                                       <select name='style'  id = 'type' class="custom-select custom-select-sm" >
+                                            {foreach $style as $k => $v}
+                                                  {if $row['c_style'] == $k}
+                                                    <option selected ={$row['c_style']} value ={$row['c_style']}>{$v}</option>
+                                              {else}
+                                                   <option  value ={$k}>{$v}</option>
+                                              {/if}
+                                            {/foreach}
+                                      </select>
+                                      </div>
+               </div>
+    </div> 
+    
+     <div class ="row clearfix">
+                        <div class ="col-sm-3">
+                            <!--占位-->
+                        </div> 
+            <div class ="col-sm-6">
+
+
+        
+                    <br>
+                    <input type ="hidden" name='id' value="{if isset($row['c_id']) || isset($id)}{$row['c_id']}{/if}"></input>
+                    <input type ="hidden" name='oper' value="commit"></input>
+                    <button   type="submit" class= 'btn btn-dark'>save</button>       
+          
+    
+    </form>
+    

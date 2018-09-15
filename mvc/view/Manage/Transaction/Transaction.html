@@ -1,0 +1,26 @@
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">名称</th>
+        <th scope="col">说明</th>
+        <th scope="col">文件路径</th>
+        <th scope="col">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+{foreach $list as $k => $row} 
+      <tr>
+        <td>{$row['tr_name']}</td>
+        <td item-height="200xp;">{$row['tr_md']}  </td>
+        <td>{$row['tr_file']}</td>
+        <td>
+             <a href='/Manage/Transaction/delete' class="btn  btn-sm btn-secondary"> 删除 </a>
+        </td>
+      </tr>
+{/foreach}
+    </tbody>
+</table>
+
+ 

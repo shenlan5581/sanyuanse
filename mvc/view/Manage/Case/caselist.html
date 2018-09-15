@@ -1,0 +1,111 @@
+ <div class="alert alert-secondary"  style="background-color: rgb(255, 255, 255)"="alert"> 
+    <span> 案例列表：</span><br>
+    <span style="font-size: 10px;">管理案例信息相关</span> 
+ </div>
+ 
+ <div class="container-fluid ">
+    <div class="row ">
+        <div class="col-sm-3 column">
+        <!-- 类型 -->
+                <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend ">
+                          <label class="input-group-text">类型</label>
+                        </div>
+                       <select onchange=search() id = 'type' class="custom-select custom-select-sm" >
+                            {foreach $type as $k => $v}
+                                  {if $curr_type == $k}
+                                    <option selected ={$curr_type} value ={$curr_type}>{$v}</option>
+                              {else}
+                                   <option  value ={$k}>{$v}</option>
+                              {/if}
+                            {/foreach}
+                      </select>
+                      </div>
+        </div>
+  
+        <div class="col-sm-3 column">
+        <!-- style-->
+                <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text">风格</label>
+                        </div> 
+                       <select onchange=search() id = 'style' class="custom-select custom-select-sm" >
+                            {foreach $style as $k => $v}
+                                {if $curr_style == $k}
+                                  <option selected   ="{$curr_type}" value ={$curr_style}>{$v}</option>
+                            {else}
+                                 <option  value ={$k}>{$v}</option>
+                            {/if}
+                          {/foreach}
+                      </select>
+                      </div>
+        </div>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">微缩图</th>
+        <th scope="col">标题</th>
+        <th scope="col">分类</th>
+        <th scope="col">风格 </th>
+        <th scope="col">简介</th>
+        <th scope="col">日期</th>
+        <th scope="col">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+{foreach $list as $row} 
+      <tr>
+        <td><img  style="height:50px;width:auto" src="{$row['c_title_img']}"></td>
+        <td>{$row['c_title']} </td>
+        <td>{$row['c_type']} </td>
+        <td>{$row['c_style']} </td>
+        <td>{$row['c_biref']}  </td>
+        <td>{$row['c_date']}  </td>
+        <td>
+                    <a href="/Manage/Case/CaseEdit?id={$row['c_id']}" class="btn btn-sm btn-light"> 编辑 </a>
+                    <a href="/Manage/Case/CaseDelete?id={$row['c_id']}" class="btn  btn-sm btn-secondary"> 删除 </a>
+        </td>
+      </tr>
+{/foreach}
+    </tbody>
+  </table>
+
+  <nav aria-label="Page navigation example" >
+        <ul class="pagination">
+          <li class="page-item"><a  style="color:rgb(31, 31, 31)"  class="page-link" onclick=page({$curr_count-1}) href="#">上一个</a></li>
+          {for $i=1 to $count}
+             {if $i == $curr_count}
+            <li class="page-item"><a style="color:rgb(22, 170, 180)" class="page-link" >{$i}</a></li>
+             {else}
+            <li class="page-item"><a style="color:rgb(167, 167, 167)"  class="page-link" onclick=page({$i}) href="#">{$i}</a></li>
+            {/if}
+          {/for}
+          <li class="page-item"><a style="color:rgb(33, 33, 33)" class="page-link" onclick=page({$curr_count+1}) href="#">下一个</a></li>
+        </ul>
+      </nav>
+    
+      <script>
+    function page(index){
+      if(index>{$count} || index < 0){
+          return;
+      }
+      var style=$('#style').val();
+      var type=$('#type').val();
+      window.location.href='{$url}?style='+style+'&type='+type+'&index='+index; 
+    }
+    function search() {
+      var style=$('#style').val();
+      var type=$('#type').val();
+      window.location.href='{$url}?style='+style+'&type='+type; 
+    }
+      </script>
+
+
+
+
+
+
+

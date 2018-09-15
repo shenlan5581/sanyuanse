@@ -1,0 +1,53 @@
+
+<form method="Post" action='/Manage/Transaction/Create'>
+    <div class="container-fluid" >
+      <div class ="row clearfix">  
+
+            <div class ="col-sm-4">
+                    <!--占位-->
+            </div> 
+
+                <div class ="col-sm-4" style="text-align: center">
+                    <span>请输入需要操作的数据库名称</span><hr>
+                    <input id='DBname' style="width:50%"required="required"  name='DBname' type="text"  aria-label="Username" aria-describedby="basic-addon1"> </input>
+                    <button   type="button" onclick="GetTable()" class= 'btn btn-sm btn-dark'>确定</button>       
+                </div>  
+   
+    </div>
+  </div>
+
+   
+<script>
+function GetTable(){
+    var dbname = $('#DBname').val();
+
+    $.ajax({
+            type: 'Get',
+            url: '/Public/DB/TableLIst',
+            data:{
+                db_name:dbname,
+            } ,
+            success: function (result) {
+                var json = JSON.parse(result);
+                if (json.status == true) { //success 
+
+
+                
+                } else {  //failed
+                }
+            }
+
+
+}
+
+
+
+
+
+
+</script>
+
+
+
+
+</form>

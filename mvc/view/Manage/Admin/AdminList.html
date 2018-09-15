@@ -1,0 +1,89 @@
+  
+ <div class="alert alert-secondary"  style="background-color: rgb(255, 255, 255)"="alert"> 
+    <span> 管理员列表：</span><br>
+    <span style="font-size: 10px;">该页面编辑管理员,权限等级</span> 
+ </div>
+    {if isset($message)}
+    <div class="alert alert-success" role="alert">
+    {$message}
+      </div>
+    {/if}
+
+
+<div class="container-fluid ">
+        <div class="row ">
+            <div class="col-md-4 column">
+
+                    <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="inputGroupSelect01">等级</label>
+                            </div>
+                            <select onchange=search() id = 'level' class="custom-select" id="inputGroupSelect01">
+                            {for $i=1 to 4}
+                              {if $i == $level}
+                              <option selected>{$i}</option>
+                              {else}
+                              <option value={$i}>{$i}</option>
+                              {/if}
+                            {/for}
+                            </select>
+                          </div>
+
+            </div>
+            <div class="col-md-4 column">
+            </div>
+            <div class="col-md-4 column">
+            </div>
+        </div>
+    </div>
+
+
+ 
+<table class="table">
+        <thead>
+          <tr>
+            <th scope="col">用户名</th>
+            <th scope="col">权限等级</th>
+            <th scope="col">邮箱</th>
+            <th scope="col">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+{foreach $list as $row} 
+          <tr>
+            <td> {$row['a_user']} </td>
+            <td> {$row['a_level']} </td>
+            <td> {$row['a_email']} </td>
+            <td>
+                        <a href="/Manage/Admin/AdminEdit?id={$row['a_id']}" class="btn btn-sm btn-light"> 编辑 </a>
+                        <a href="/Manage/Admin/Admin?oper=delete&id={$row['a_id']}" class="btn   btn-sm btn-secondary"> 删除 </a>
+            </td>
+          </tr>
+{/foreach}
+        </tbody>
+      </table>
+
+<nav aria-label="Page navigation example" >
+    <ul class="pagination">
+      <li class="page-item"><a  style="color:rgb(31, 31, 31)"  class="page-link" onclick=page({$curr_count-1}) href="#">上一个</a></li>
+      {for $i=1 to $count}
+         {if $i == $curr_count}
+        <li class="page-item"><a style="color:rgb(22, 170, 180)" class="page-link" >{$i}</a></li>
+         {else}
+        <li class="page-item"><a style="color:rgb(167, 167, 167)"  class="page-link" onclick=page({$i}) href="#">{$i}</a></li>
+        {/if}
+      {/for}
+      <li class="page-item"><a style="color:rgb(33, 33, 33)" class="page-link" onclick=page({$curr_count+1}) href="#">下一个</a></li>
+    </ul>
+  </nav>
+
+  <script>
+function page(index){
+  var level =$('#level').val();
+  window.location.href='/Manage/Admin/Admin?level='+level+'&index='+index; 
+}
+function search() {
+   var level =$('#level').val();
+ window.location.href='/Manage/Admin/Admin?level='+level; 
+}
+  </script>
