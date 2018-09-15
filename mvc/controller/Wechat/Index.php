@@ -5,15 +5,16 @@ class App_Controller_Wechat_Index{
         
    $signature  =   $_GET["signature"];
    $timestamp  =   $_GET["timestamp"];
-   $nonce = $_GET["nonce"];
+   $nonce      =   $_GET["nonce"];
    
-    
-    $tmpArr = array($timestamp, $nonce);
+    $token =  "sanyuanse";
+    $tmpArr = array($timestamp, $nonce,$token);
     sort($tmpArr, SORT_STRING);
-    $tmpStr = implode( $tmpArr );
+    $tmpStr = implode( $tmpArr);
     $tmpStr = sha1( $tmpStr );
     
     if( $signature = $tmpStr ){
+        echo $_GET['echostr'];
     return true;
     }else{
     return false;
