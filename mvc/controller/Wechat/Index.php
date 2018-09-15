@@ -2,7 +2,7 @@
 
 class App_Controller_Wechat_Index{
     public function indexAction(){
-        echo 'admin,index';
+        echo 'what';
     }
     public function testAction(){
      
